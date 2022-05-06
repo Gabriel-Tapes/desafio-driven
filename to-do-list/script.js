@@ -12,7 +12,7 @@ function adicionar(elemento) {
         const cardId = new Date().getTime()
         const card = `
         <li id="${cardId}" draggable="true" ondragstart="arrastar(event, this.id)">
-            <p class="tarefa" onclick="event.stopPropagation()" contenteditable="true" onblur="salvarAlteracoes(this)">
+            <p class="tarefa" onclick="event.stopPropagation()" ontouchstart="event.stopPropagation()" contenteditable="true" onblur="salvarAlteracoes(this)">
                 ${texto}
             </p class="excluir">
             <p class="excluir" onclick="deletar(this)">
@@ -28,7 +28,7 @@ function adicionar(elemento) {
     }
 }
 
-function arrastar(event, id) {
+function arrastar(event) {
     event.dataTransfer.setData("tarefa", event.target.id);
 }
 
@@ -87,14 +87,14 @@ function salvarAlteracoes(elemento) {
     const texto = elemento.innerText;
 
     localStorage[prefixo + cardId] = `
-    <li id="${cardId}" draggable="true">
-        <p class="tarefa" onclick="event.stopPropagation()" contenteditable="true" onblur="salvarAlteracoes(this)">
-            ${texto}
-        </p class="excluir">
-        <p class="excluir" onclick="deletar(this)">
-            x
-        </p>
-    </li>,${ulId}`;
+    <li id="${cardId}" draggable="true" ondragstart="arrastar(event, this.id)">
+            <p class="tarefa" onclick="event.stopPropagation()" ontouchstart="event.stopPropagation()" contenteditable="true" onblur="salvarAlteracoes(this)">
+                ${texto}
+            </p class="excluir">
+            <p class="excluir" onclick="deletar(this)">
+                x
+            </p>
+        </li>,${ulId}`;
 }
 
 manterAlteracoes();
