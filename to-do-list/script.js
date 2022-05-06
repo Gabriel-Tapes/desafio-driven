@@ -12,7 +12,7 @@ function adicionar(elemento) {
         const cardId = new Date().getTime()
         const card = `
         <li id="${cardId}" draggable="true" ondragstart="arrastar(event, this.id)">
-            <p class="tarefa" contenteditable="true" onblur="salvarAlteracoes(this)">
+            <p class="tarefa" onclick="event.stopPropagation()" contenteditable="true" onblur="salvarAlteracoes(this)">
                 ${texto}
             </p class="excluir">
             <p class="excluir" onclick="deletar(this)">
@@ -88,7 +88,7 @@ function salvarAlteracoes(elemento) {
 
     localStorage[prefixo + cardId] = `
     <li id="${cardId}" draggable="true">
-        <p class="tarefa" contenteditable="true" onblur="salvarAlteracoes(this)">
+        <p class="tarefa" onclick="event.stopPropagation()" contenteditable="true" onblur="salvarAlteracoes(this)">
             ${texto}
         </p class="excluir">
         <p class="excluir" onclick="deletar(this)">
