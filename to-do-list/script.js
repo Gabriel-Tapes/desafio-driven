@@ -1,4 +1,7 @@
 const prefixo = "card-";
+const cardsAFazer = document.getElementById("cardsAFazer");
+const cardsFazendo = document.getElementById("cardsFazendo");
+const cardsEntregue = document.getElementById("cardsEntregue");
 
 function adicionar(elemento) {
     const texto = prompt("Qual é a tarefa?");
@@ -8,7 +11,7 @@ function adicionar(elemento) {
 
         const cardId = new Date().getTime()
         const card = `
-        <li id="${cardId}" draggable="true" ondragstart="arrastar(event)">
+        <li id="${cardId}" draggable="true" ondragstart="arrastar(event, this.id)">
             <p class="tarefa" contenteditable="true" onblur="salvarAlteracoes(this)">
                 ${texto}
             </p class="excluir">
@@ -19,12 +22,13 @@ function adicionar(elemento) {
 
         const ul = document.getElementById(ulId);
 
+
         ul.innerHTML = ul.innerHTML + card;
         localStorage.setItem(prefixo + cardId, [card, ulId]);
     }
 }
 
-function arrastar(event) {
+function arrastar(event, id) {
     event.dataTransfer.setData("tarefa", event.target.id);
 }
 
@@ -32,20 +36,27 @@ function soltar(event, id) {
     event.preventDefault();
     const target = document.getElementById(id);
     const data = event.dataTransfer.getData("tarefa");
+    const uls = [cardsAFazer, cardsFazendo, cardsEntregue];
 
     const card = document.getElementById(data);
 
     target.appendChild(card);
 
+    for (let i = 0; i < 3; i++) {
+        uls[i].classList.remove("em-cima");
+    }
+
     key = prefixo + data;
     atual = localStorage[key].slice(localStorage[key].lastIndexOf(",") + 1);
 
     localStorage[key] = localStorage[key].replace(atual, id);
-
 }
 
-function emCima(event) {
+function emCima(event, id) {
     event.preventDefault();
+
+    const ul = document.getElementById(id).classList;
+    ul.add("em-cima");
 }
 
 function deletar(elemento) {

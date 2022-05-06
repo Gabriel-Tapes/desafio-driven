@@ -12,7 +12,7 @@
 <body>
     <div class="bloco">
         <h3>A Fazer</h3>
-        <ul id="cardsAFazer" class="cards" ondrop="soltar(event, this.id)" ondragover="emCima(event)">
+        <ul id="cardsAFazer" class="cards" ondrop="soltar(event, this.id)" ondragover="emCima(event, this.id)">
         </ul>
         <div class="adicionar" onclick="adicionar(this)">
             <p>Adicionar Tarefa</p>
@@ -20,7 +20,7 @@
     </div>
     <div class="bloco">
         <h3>Fazendo</h3>
-        <ul id="cardsFazendo" class="cards" ondrop="soltar(event, this.id)" ondragover="emCima(event)">
+        <ul id="cardsFazendo" class="cards" ondrop="soltar(event, this.id)" ondragover="emCima(event, this.id)">
         </ul>
         <div class="adicionar" onclick="adicionar(this)">
             <p>Adicionar Tarefa</p>
@@ -28,7 +28,7 @@
     </div>
     <div class="bloco">
         <h3>Terminado</h3>
-        <ul id="cardsEntregue" class="cards" ondrop="soltar(event, this.id)" ondragover="emCima(event)">
+        <ul id="cardsEntregue" class="cards" ondrop="soltar(event, this.id)" ondragover="emCima(event, this.id)">
         </ul id="cards">
         <div class="adicionar" onclick="adicionar(this)">
             <p>Adicionar Tarefa</p>
